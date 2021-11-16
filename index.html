@@ -58,7 +58,7 @@
         <div class="two-col">
           <div class="col">
             <div class="form-group">
-              <label for="name">姓名</label>
+              <label for="name">姓名(請寫全名)</label>
               <input class="form-control" id="name" type="text" v-model="person.name" :disabled="!pass" />
             </div>
           </div>
@@ -67,7 +67,7 @@
               <label for="site">聚會類型</label>
               <!-- <input class="form-control" id="site" type="text" v-model="person.site" :disabled="person.name == undefined"/> -->
               <select class="form-select" id="kind" v-model="person.kind" :disabled="!pass">
-                <option value="" selected>請選擇...</option>
+                <option value="" selected="selected">請選擇...</option>
                 <option value="成人崇拜">成人崇拜</option>
                 <option value="青年崇拜">青年崇拜</option>
               </select>
@@ -83,7 +83,7 @@
           <!-- <input type="date" class="form-control" id="view_date" v-model="person.view_date" placeholder="可同時選擇多個日期" :disabled="!pass"> -->
           <div id="sandbox-container">
             <div class="input-group date">
-              <input class="form-control" type="text" id="view_date" :disabled="!pass" />
+              <input class="form-control" type="text" id="view_date" :disabled="!pass" readonly />
               <span class="input-group-addon">
                 <!-- <i class="glyphicon glyphicon-th"></i> -->
               </span>
@@ -94,7 +94,14 @@
           <label for="message">備註</label>
           <input class="form-control" id="memo" type="text" v-model="person.memo" :disabled="!pass"/>
         </div>
+        <div class="form-group">
+          <label for="url">通知訂閱網址</label>
+          <!-- <input class="form-control" id="url" type="text" style="height:100px;" v-model="url" /> -->
+          <textarea class="form-control" id="url" v-model="url" rows="5"></textarea>
+          <button type="button" class="btn btn-primary">Primary</button>
+        </div>
         <div class="submit"><a href="#" :class="{ disabled: !pass }" @click.prevent="submit">送出</a></div>
+        <!-- <button class="btn" data-clipboard-target="#foo"><img src="assets/clippy.svg" alt="Copy to clipboard"></button> -->
       </section>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
@@ -102,19 +109,20 @@
   </body>
 
   <script src="js/jquery-2.2.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/bootstrap-datepicker.min.js"></script>
   <script src="js/bootstrap-datepicker.zh-TW.js"></script>
   <script>
       $('#view_date').datepicker({
-          format: "mm/dd",
+          format: "mm-dd",
           startDate: "2021/11/10",
           clearBtn: true,
           language: "zh-TW",
           multidate: true,
-          daysOfWeekDisabled: "1,2,3,4,5",
+          // daysOfWeekDisabled: "1,2,3,4,5",
           daysOfWeekHighlighted: "0,6",
           // autoclose: true,
-          todayHighlight: true
+          // todayHighlight: true
       });
   </script>
 
