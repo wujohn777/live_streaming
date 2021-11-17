@@ -1,8 +1,3 @@
-<!-- 目前問題
-  1.聚會類型下拉顯示x
-  2.姓名可下拉選擇或是直接輸入 -- 先直接輸入
-  3.收看日期可視聚會類型多選 
--->
 
 <!DOCTYPE html>
 <html lang="zh-TW">
@@ -96,12 +91,16 @@
         </div>
         <div class="form-group">
           <label for="url">通知訂閱網址</label>
-          <!-- <input class="form-control" id="url" type="text" style="height:100px;" v-model="url" /> -->
-          <textarea class="form-control" id="url" v-model="url" rows="5"></textarea>
-          <!-- <button type="button" class="btn btn-primary">Primary</button> -->
+          <textarea class="form-control" id="url" v-model="url" style="height:100px;" rows="5"></textarea>
         </div>
-        <div class="submit"><a href="#" :class="{ disabled: !pass }" @click.prevent="submit">送出</a></div>
-        <!-- <button class="btn" data-clipboard-target="#foo"><img src="assets/clippy.svg" alt="Copy to clipboard"></button> -->
+        <div class="two-col">
+          <div class="col">        
+            <div class="submit"><a href="#" :class="{ disabled: !pass }" @click.prevent="submit">送出</a></div>
+          </div><!-- 
+          <div class="col">        
+            <div class="submit"><a href="#" data-clipboard-target="#url">訂閱</a></div>
+          </div> -->
+        </div>  
       </section>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
@@ -109,17 +108,19 @@
   </body>
 
   <script src="js/jquery-2.2.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/bootstrap-datepicker.min.js"></script>
   <script src="js/bootstrap-datepicker.zh-TW.js"></script>
   <script>
+      var Today = moment(); // 今天日期
       $('#view_date').datepicker({
           format: "mm-dd",
-          startDate: "2021/11/10",
+          startDate: Today.format("YYYY/MM/DD"),
           clearBtn: true,
           language: "zh-TW",
           multidate: true,
-          // daysOfWeekDisabled: "1,2,3,4,5",
+          daysOfWeekDisabled: "1,2,3,4,5",
           daysOfWeekHighlighted: "0,6",
           // autoclose: true,
           // todayHighlight: true
