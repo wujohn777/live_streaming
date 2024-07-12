@@ -115,9 +115,12 @@
   <script src="js/bootstrap-datepicker.zh-TW.js"></script>
   <script>
       var Today = moment(); // 今天日期
+      var tomorrow = moment().add(1,"d"); // 明天日期
       $('#view_date').datepicker({
           format: "mm-dd",
-          startDate: Today.format("YYYY/MM/DD"),
+          minDate: moment().add(1,"d"),
+          maxDate: moment().add(1, "M"), // 限制在一個內才能訂閱
+          startDate: tomorrow.format("YYYY/MM/DD"), // 明天日期
           clearBtn: true,
           language: "zh-TW",
           multidate: true,
