@@ -118,8 +118,8 @@
       var tomorrow = moment().add(1,"d"); // 明天日期
       $('#view_date').datepicker({
           format: "mm-dd",
-          minDate: moment().add(1,"d"),
-          maxDate: moment().add(1, "M"), // 限制在一個內才能訂閱
+          minDate: moment().add(1,"d").format("YYYY/MM/DD"),
+          maxDate: moment().add(1, "M").format("YYYY/MM/DD"), // 限制在一個內才能訂閱
           startDate: tomorrow.format("YYYY/MM/DD"), // 明天日期
           clearBtn: true,
           language: "zh-TW",
