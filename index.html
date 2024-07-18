@@ -65,7 +65,7 @@
               <select class="form-select" id="kind" v-model="person.kind" :disabled="!pass">
                 <option value="" selected="selected">請選擇...</option>
                 <option value="成人崇拜">成人崇拜</option>
-                <option value="青年崇拜">青年崇拜</option>
+                <option value="青年崇拜">晚上合心會</option>
               </select>
             </div>        
           </div>
@@ -123,8 +123,8 @@
           clearBtn: true,
           language: "zh-TW",
           multidate: true,
-          daysOfWeekDisabled: "1,2,3,4,5",
-          daysOfWeekHighlighted: "0,6",
+          daysOfWeekDisabled: "1,2,4,5",
+          daysOfWeekHighlighted: "0,3,6",
           // autoclose: true,
           // todayHighlight: true
       });
