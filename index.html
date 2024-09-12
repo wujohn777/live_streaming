@@ -1,15 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
   <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>登記直播觀看</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="css/bootstrap-datepicker3.min.css" />
-    <link rel="stylesheet" href="css/style.min.css"/>
+    <link rel="stylesheet" href="css/style.min.css" />
   </head>
   <body>
     <div class="container" id="app">
@@ -29,79 +36,145 @@
           <div class="two-col">
             <div class="col">
               <label for="main_id">請輸入【區長或組長的 牧養系統 帳號】 </label>
-              <input class="form-control" id="id" type="text" v-model="id" @blur="getInfo()" :disabled="pass"/>
+              <input
+                class="form-control"
+                id="id"
+                type="text"
+                v-model="id"
+                @blur="getInfo()"
+                :disabled="pass"
+              />
             </div>
             <div class="col">
               <label for="main_id">請輸入【區長或組長的 牧養系統 密碼】</label>
-              <input class="form-control" id="password" type="password" v-model="password" @blur="getInfo()" :disabled="pass"/>
-            </div>            
+              <input
+                class="form-control"
+                id="password"
+                type="password"
+                v-model="password"
+                @blur="getInfo()"
+                :disabled="pass"
+              />
+            </div>
           </div>
         </div>
         <div class="two-col">
           <div class="col">
             <div class="form-group">
               <label for="name">區</label>
-              <input class="form-control" id="zone" type="text" v-model="person.zone" disabled />
+              <input
+                class="form-control"
+                id="zone"
+                type="text"
+                v-model="person.zone"
+                disabled
+              />
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label for="site">小組</label>
-              <input class="form-control" id="cell" type="text" v-model="person.cell" disabled />
-            </div>        
+              <input
+                class="form-control"
+                id="cell"
+                type="text"
+                v-model="person.cell"
+                disabled
+              />
+            </div>
           </div>
         </div>
         <div class="two-col">
           <div class="col">
             <div class="form-group">
               <label for="name">觀看者姓名(請寫全名)</label>
-              <input class="form-control" id="name" type="text" v-model="person.name" :disabled="!pass" />
+              <input
+                class="form-control"
+                id="name"
+                type="text"
+                v-model="person.name"
+                :disabled="!pass"
+              />
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label for="site">聚會類型</label>
               <!-- <input class="form-control" id="site" type="text" v-model="person.site" :disabled="person.name == undefined"/> -->
-              <select class="form-select" id="kind" v-model="person.kind" :disabled="!pass">
+              <select
+                class="form-select"
+                id="kind"
+                v-model="person.kind"
+                :disabled="!pass"
+              >
                 <option value="" selected="selected">請選擇...</option>
                 <option value="成人崇拜">成人崇拜</option>
                 <option value="晚上合心會">晚上合心會</option>
               </select>
-            </div>        
+            </div>
           </div>
         </div>
         <div class="form-group">
           <label for="message">無法實體聚會原因</label>
-          <input class="form-control" id="reason" type="text" v-model="person.reason" :disabled="!pass"/>
+          <input
+            class="form-control"
+            id="reason"
+            type="text"
+            v-model="person.reason"
+            :disabled="!pass"
+          />
         </div>
         <div class="form-group">
           <label for="view_date">收看日期(可選擇多個日期)</label>
           <!-- <input type="date" class="form-control" id="view_date" v-model="person.view_date" placeholder="可同時選擇多個日期" :disabled="!pass"> -->
           <div id="sandbox-container">
             <div class="input-group date">
-              <input class="form-control" type="text" id="view_date" :disabled="!pass" readonly />
+              <input
+                class="form-control"
+                type="text"
+                id="view_date"
+                :disabled="!pass"
+                readonly
+              />
               <span class="input-group-addon">
                 <!-- <i class="glyphicon glyphicon-th"></i> -->
               </span>
             </div>
           </div>
-        </div>        
+        </div>
         <div class="form-group">
           <label for="message">備註</label>
-          <input class="form-control" id="memo" type="text" v-model="person.memo" :disabled="!pass"/>
+          <input
+            class="form-control"
+            id="memo"
+            type="text"
+            v-model="person.memo"
+            :disabled="!pass"
+          />
         </div>
         <div class="form-group">
           <label for="url">通知訂閱網址</label>
-          <textarea class="form-control" id="url" v-model="url" style="height:250px;" rows="5"></textarea>
+          <textarea
+            class="form-control"
+            id="url"
+            v-model="url"
+            style="height: 250px"
+            rows="5"
+          ></textarea>
         </div>
         <div class="two-col">
-          <div class="col">        
-            <div class="submit"><a href="#" :class="{ disabled: !pass }" @click.prevent="submit">送出</a></div>
-          </div><!-- 
+          <div class="col">
+            <div class="submit">
+              <a href="#" :class="{ disabled: !pass }" @click.prevent="submit"
+                >送出</a
+              >
+            </div>
+          </div>
+          <!-- 
           <div class="col">        
             <div class="submit"><a href="#" data-clipboard-target="#url">訂閱</a></div>
           </div> -->
-        </div>  
+        </div>
       </section>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
@@ -110,24 +183,48 @@
 
   <script src="js/jquery-2.2.4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
   <script src="js/bootstrap-datepicker.min.js"></script>
   <script src="js/bootstrap-datepicker.zh-TW.js"></script>
   <script>
-      var Today = moment(); // 今天日期
-      var tomorrow = moment().add(1,"d"); // 明天日期
-      $('#view_date').datepicker({
-          format: "mm-dd",
-          startDate: tomorrow.format("YYYY/MM/DD"), // 開始時間設為明天日期
-          // endDate: moment().add(1, "M").format("YYYY/MM/DD"), // 限制在一個內才能訂閱
-          clearBtn: true,
-          language: "zh-TW",
-          multidate: true,
-          daysOfWeekDisabled: "1,2,4,5",
-          daysOfWeekHighlighted: "0,3,6",
-          // autoclose: true,
-          // todayHighlight: true
-      });
-  </script>
+    var Today = moment(); // 今天日期
+    var tomorrow = moment().add(1, "d"); // 明天日期
+    let daysOfWeekDisabled = "";
+    let daysOfWeekHighlighted = "";
 
+    $("#kind").change(function () {
+      if ($(this).val() == "成人崇拜") {
+        daysOfWeekDisabled = "1,2,3,4,5";
+        daysOfWeekHighlighted = "0,6";
+      }
+      if ($(this).val() == "晚上合心會") {
+        daysOfWeekDisabled = "0,1,2,4,5,6";
+        daysOfWeekHighlighted = "3";
+      }
+
+      // 取消之前選的日期
+      $("#view_date").val("");
+
+      // 重新設定datepicker
+      $("#view_date").datepicker("destroy");
+      $("#view_date").datepicker({
+        format: "mm-dd",
+        startDate: tomorrow.format("YYYY/MM/DD"), // 開始時間設為明天日期
+        endDate: "+31d", // 限制在一個月內才能訂閱
+        datesDisabled: "+31d", // 限制在一個月內才能訂閱
+        clearBtn: true,
+        language: "zh-TW",
+        multidate: true,
+        daysOfWeekDisabled: daysOfWeekDisabled,
+        daysOfWeekHighlighted: daysOfWeekHighlighted,
+        // autoclose: true,
+        // todayHighlight: true
+      });
+    });
+  </script>
 </html>
