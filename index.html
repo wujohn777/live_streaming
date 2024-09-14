@@ -100,7 +100,6 @@
           <div class="col">
             <div class="form-group">
               <label for="site">聚會類型</label>
-              <!-- <input class="form-control" id="site" type="text" v-model="person.site" :disabled="person.name == undefined"/> -->
               <select
                 class="form-select"
                 id="kind"
@@ -126,7 +125,6 @@
         </div>
         <div class="form-group">
           <label for="view_date">收看日期(可選擇多個日期)</label>
-          <!-- <input type="date" class="form-control" id="view_date" v-model="person.view_date" placeholder="可同時選擇多個日期" :disabled="!pass"> -->
           <div id="sandbox-container">
             <div class="input-group date">
               <input
@@ -162,18 +160,21 @@
             rows="5"
           ></textarea>
         </div>
-        <div class="two-col">
-          <div class="col">
-            <div class="submit">
-              <a href="#" :class="{ disabled: !pass }" @click.prevent="submit"
-                >送出</a
-              >
-            </div>
-          </div>
-          <!-- 
-          <div class="col">        
-            <div class="submit"><a href="#" data-clipboard-target="#url">訂閱</a></div>
-          </div> -->
+        <div class="submit-buttons">
+          <a
+            href="#"
+            class="btn btn-primary"
+            :class="{ disabled: !pass }"
+            @click.prevent="submit"
+            >送出</a
+          >
+          <button
+            class="btn btn-secondary"
+            id="copyButton"
+            data-clipboard-target="#url"
+          >
+            複製連結
+          </button>
         </div>
       </section>
     </div>
@@ -194,8 +195,21 @@
   <script>
     var Today = moment(); // 今天日期
     var tomorrow = moment().add(1, "d"); // 明天日期
+    var clipboard = new ClipboardJS("#copyButton"); // 初始化Clipboard.js
+
     let daysOfWeekDisabled = "";
     let daysOfWeekHighlighted = "";
+
+    // 當成功複製時，彈出提示
+    clipboard.on("success", function (e) {
+      alert("連結已成功複製至剪貼簿!");
+      e.clearSelection(); // 清除選擇，避免干擾用戶
+    });
+
+    // 當複製失敗時，提示用戶
+    clipboard.on("error", function (e) {
+      alert("複製失敗，請手動複製。");
+    });
 
     $("#kind").change(function () {
       if ($(this).val() == "成人崇拜") {
