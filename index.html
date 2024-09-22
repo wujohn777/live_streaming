@@ -33,7 +33,14 @@
         <div class="form-group">
           <div class="red-dashed-border">
             <ol
-              style="color: blue; font-weight: bold; padding: 20px; margin: 2px"
+              style="
+                margin: auto;
+                color: blue;
+                font-weight: bold;
+                margin-right: 5px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+              "
             >
               <li>
                 當天最晚訂閱時間【週三晚上合心會在17:00前】、【週六晚崇在16:00前】、【週日早崇在07:00前】
@@ -243,6 +250,9 @@
       ) {
         startDate = startDate.add(1, "d");
       }
+      console.log(Today.day());
+      console.log(Today.format("HH:mm"));
+      console.log(startDate.format("YYYY-MM-DD"));
 
       // 取消之前選的日期
       $("#view_date").val("");
