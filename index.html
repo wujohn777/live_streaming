@@ -260,8 +260,8 @@
       // 重新設定datepicker
       $("#view_date").datepicker("destroy");
       $("#view_date").datepicker({
-        format: "yyyy-mm-dd",
-        startDate: startDate.format("YYYY-MM-DD"),
+        format: "mm-dd",
+        startDate: startDate.format("MM-DD"),
         endDate: "+31d", // 限制在一個月內才能訂閱
         datesDisabled: "+31d", // 限制在一個月內才能訂閱
         clearBtn: true,
