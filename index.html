@@ -31,8 +31,22 @@
           <h1>登記直播觀看</h1>
         </div>
         <div class="form-group">
+          <div class="red-dashed-border">
+            <ol
+              style="color: blue; font-weight: bold; padding: 20px; margin: 2px"
+            >
+              <li>
+                當天最晚訂閱時間【週三晚上合心會在17:00前】、【週六晚崇在16:00前】、【週日早崇在07:00前】
+              </li>
+              <li>超過以上訂閱時間，若臨時有需要直播連結者，請找吉宏處理。</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="form-group">
           <input type="hidden" id="leader" v-model="person.leader" />
           <input type="hidden" id="uuid" v-model="person.uuid" />
+
           <div class="two-col">
             <div class="col">
               <label for="main_id">請輸入【區長或組長的 牧養系統 帳號】 </label>
@@ -194,7 +208,7 @@
   <script src="js/bootstrap-datepicker.zh-TW.js"></script>
   <script>
     var Today = moment(); // 今天日期
-    var tomorrow = moment().add(1, "d"); // 明天日期
+    var startDate = Today; // 開始日期
     var clipboard = new ClipboardJS("#copyButton"); // 初始化Clipboard.js
 
     let daysOfWeekDisabled = "";
@@ -221,14 +235,23 @@
         daysOfWeekHighlighted = "3";
       }
 
+      // 當週最晚截止日是週三17:00前、週六中午16:00前、週日中午07:00前
+      if (
+        (Today.day() == 3 && Today.format("HH:mm") > "17:00") || // 合心會
+        (Today.day() == 6 && Today.format("HH:mm") > "16:00") || // 週六崇拜
+        (Today.day() == 0 && Today.format("HH:mm") > "07:00") // 週日崇拜
+      ) {
+        startDate = startDate.add(1, "d");
+      }
+
       // 取消之前選的日期
       $("#view_date").val("");
 
       // 重新設定datepicker
       $("#view_date").datepicker("destroy");
       $("#view_date").datepicker({
-        format: "mm-dd",
-        startDate: tomorrow.format("YYYY/MM/DD"), // 開始時間設為明天日期
+        format: "yyyy-mm-dd",
+        startDate: startDate.format("YYYY-MM-DD"),
         endDate: "+31d", // 限制在一個月內才能訂閱
         datesDisabled: "+31d", // 限制在一個月內才能訂閱
         clearBtn: true,
